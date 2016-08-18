@@ -1,0 +1,61 @@
+@import  "variables.less";
+h1{
+	color: @redColor;
+	&:after
+	{
+		content : @someText;
+	}
+	 
+}
+div {
+	border: solid;
+
+	border-color: @yellowCode;
+}
+
+
+.for(@items, @code) {
+     & when (length(@items)>0){
+      & {
+        .loop(@i: 1) when (@i =< length(@items)) {
+            @value: extract(@items, @i);
+            @code();
+            .loop(@i + 1);
+        }
+        .loop();
+    }
+  }
+}
+
+.forNumber(@items, @code) {
+        & when (@items>0){
+      & {
+        .loop(@i: 0) when (@i < @items) {
+            @value: @i;
+            @code();
+            .loop(@i + 1);
+        }
+        .loop();
+    }
+  }
+}
+
+/*Cursors Start*/
+.for(@cursors, {
+    .cursor-@{value} {
+        cursor: @value;
+    }
+}); 
+/*Cursors End*/
+
+ .for(@display-styles, {
+    .display-@{value} {
+        display: @value;
+    }
+});
+
+ .forNumber(16, {
+    .font-size-@{value}px {
+        font-size: (1px * @value);
+    }
+}); 
